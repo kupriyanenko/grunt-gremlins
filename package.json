@@ -1,0 +1,33 @@
+{
+  "name": "gremlins-grunt",
+  "version": "0.0.1",
+  "description": "gremlins-grunt task",
+  "main": "tasks/gremlinsjs.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kupriyanenko/grunt-gremlins.git"
+  },
+  "dependencies": {
+    "colors": "~0.6.2",
+    "gremlins.js": "~0.1.0",
+    "phantomjs": "^1.9.7-1"
+  },
+  "keywords": [
+    "gremlins.js",
+    "gremlins-grunt",
+    "grunt"
+  ],
+  "author": "Alexey Kupriyanenko <a.kupriyanenko@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kupriyanenko/grunt-gremlins/issues"
+  },
+  "homepage": "https://github.com/kupriyanenko/grunt-gremlins",
+  "devDependencies": {}
+}
