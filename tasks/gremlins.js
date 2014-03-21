@@ -5,7 +5,12 @@ var child_process = require('child_process');
 module.exports = function(grunt) {
   grunt.registerMultiTask('gremlins', 'Monkey testing.', function() {
     var done = this.async();
-    var options = this.options({});
+    var options = this.options();
+
+    if (!options.path) {
+      grunt.warn('Page path is not defined');
+    }
+
     var args = [path.resolve(__dirname, './lib/gremlins.js'), options.path, options.test, options.timeout]
     var phantom = child_process.spawn(phantomjsBinPath, args);
 
