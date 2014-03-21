@@ -11,7 +11,11 @@
     var horde = gremlins.createHorde()
         .gremlin(gremlins.species.clicker());
 
-    window.phantomHorde && window.phantomHorde(horde, { nb: 20 });
+    if (window.phantomHorde) {
+        window.phantomHorde(horde, { nb: 20 });
+    } else {
+        horde.unleash({ nb: 20 });
+    }
     </script>
 </body>
 </html>

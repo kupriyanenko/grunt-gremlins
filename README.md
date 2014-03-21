@@ -27,26 +27,100 @@ grunt.loadNpmTasks('grunt-gremlins');
 *This plugin was designed to work with Grunt 0.4.x. If you're still using grunt v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4), but in case you can't please use [v0.3.2](https://github.com/gruntjs/grunt-contrib-clean/tree/grunt-0.3-stable).*
 
 ## Gremlins task
+_Run this task with the `grunt gremlins` command._
 
-Inside your `Gruntfile.js` file add a section named `gremlins`.
+Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
 
-#### Config Example
+### Options
 
-Example gremlins config:
+#### path (required)
+Type: `String`
 
-```javascript
-  gremlins: {
-    local: {
-      options: {
-        path: "./examples/basic.html"
-      }
-    },
-    external: {
-      options: {
-        path: "https://google.com",
-        timeout: 1000,
-        test: __dirname + "/examples/test.gremlins.js"
-      }
+Path to local html page or external web page
+
+#### test
+Type: `String`
+
+Path to js file with gremlins test
+
+#### timeout
+Type: `Number`
+
+Needed only if `test` defined. Timeout for test injecting.
+
+### Usage Examples
+
+There are three formats you can use to run this task.
+
+#### Test application with inluding tests
+
+_Grunt task_:
+```js
+gremlins: {
+  options: {
+    path: './examples/basic.html'
+  }
+}
+```
+
+_./examples/basic.html_:
+```html
+<!doctype html>
+<html lang="en">
+<script src="../node_modules/gremlins.js/gremlins.min.js"></script>
+<body>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <script>
+  var horde = gremlins.createHorde()
+    .gremlin(gremlins.species.clicker());
+
+  if (window.phantomHorde) {
+    window.phantomHorde(horde, { nb: 20 });
+  } else {
+    horde.unleash({ nb: 20 });
+  }
+  </script>
+</body>
+</html>
+```
+
+#### Test application with injected tests in page
+
+_Grunt task_:
+```js
+gremlins: {
+  options: {
+    path: './examples/basic.html',
+    test: __dirname + '/examples/test.gremlins.js'
+  }
+}
+```
+
+_/examples/test.gremlins.js_:
+```js
+var horde = gremlins.createHorde()
+    .gremlin(gremlins.species.clicker())
+    .gremlin(gremlins.species.scroller())
+    .mogwai(gremlins.mogwais.gizmo())
+    .mogwai(gremlins.mogwais.fps());
+
+window.phantomHorde(horde, { nb: 20 });
+```
+
+#### Specific targets with per target options
+
+_Grunt task_:
+```js
+gremlins: {
+  local: {
+    path: './examples/basic.html'
+  },
+  external: {
+    options: {
+      path: 'https://google.com',
+      test: __dirname + '/examples/test.gremlins.js',
+      timeout: 1000
     }
   }
+}
 ```

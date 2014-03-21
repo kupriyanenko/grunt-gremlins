@@ -4,4 +4,8 @@ var horde = gremlins.createHorde()
     .mogwai(gremlins.mogwais.gizmo())
     .mogwai(gremlins.mogwais.fps());
 
-window.phantomHorde && window.phantomHorde(horde, { nb: 20 });
+if (window.phantomHorde) {
+    window.phantomHorde(horde, { nb: 20 });
+} else {
+    horde.unleash({ nb: 20 });
+}
