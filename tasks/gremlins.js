@@ -2,10 +2,10 @@ var phantomjsBinPath = require('phantomjs').path;
 var child_process = require('child_process');
 
 module.exports = function(grunt) {
-  grunt.registerMultiTask('gremlinsjs', 'Monkey testing.', function() {
+  grunt.registerMultiTask('gremlins', 'Monkey testing.', function() {
     var done = this.async();
     var options = this.options({});
-    var phantom = child_process.spawn(phantomjsBinPath, ['./tasks/lib/gremlinsjs.js']);
+    var phantom = child_process.spawn(phantomjsBinPath, ['./tasks/lib/gremlins.js', options.path]);
 
     phantom.stdout.on('data', function (data) {
       process.stdout.write(data);

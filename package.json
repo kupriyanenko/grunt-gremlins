@@ -1,8 +1,8 @@
 {
-  "name": "gremlins-grunt",
+  "name": "grunt-gremlins",
   "version": "0.0.1",
   "description": "gremlins-grunt task",
-  "main": "tasks/gremlinsjs.js",
+  "main": "tasks/gremlins.js",
   "directories": {
     "example": "examples"
   },

@@ -17,8 +17,9 @@ colors.setTheme({
 var errors = [];
 var stats = null;
 var output = '';
+var url = phantom.args[0];
 
-page.open('./examples/basic.html', function(status) {
+page.open(url, function(status) {
   if (status !== 'success') {
     console.error('File opening error.'.error.underline);
     phantom.exit();
