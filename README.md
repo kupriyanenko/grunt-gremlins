@@ -35,6 +35,13 @@ Example requirejs jsttojs config:
       options: {
         path: "./examples/basic.html"
       }
+    },
+    external: {
+      options: {
+        path: "https://google.com",
+        timeout: 1000,
+        test: __dirname + "/examples/test.gremlins.js"
+      }
     }
   }
 ```

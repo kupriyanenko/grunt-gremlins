@@ -1,6 +1,8 @@
 var colors = require('colors');
 var page = require('webpage').create();
 
+page.paperSize = { width: '300px', height: '400px' };
+
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -18,16 +20,28 @@ var errors = [];
 var stats = null;
 var output = '';
 var url = phantom.args[0];
+var injectTest = phantom.args[1];
+var timeout = phantom.args[2];
 
 page.open(url, function(status) {
   if (status !== 'success') {
     console.error('File opening error.'.error.underline);
     phantom.exit();
   }
+
+  if (injectTest) {
+    setTimeout(function() {
+      page.injectJs(injectTest);
+    }, timeout)
+  }
 });
 
 page.onInitialized = function() {
   page.injectJs('./client.js');
+
+  if (injectTest) {
+    page.injectJs('../../node_modules/gremlins.js/gremlins.min.js');
+  }
 };
 
 page.onConsoleMessage = function(msg, lineNum, sourceId) {
@@ -54,7 +68,7 @@ page.onError = function(msg, trace) {
 page.onCallback = function(data) {
   // end callback
   if (data.end === true) {
-    console.log('\r\n\r\nDone, statistic:'.info.underline);
+    console.log(('\r\n\r\nDone ' + url + ', statistics:').info.underline);
 
     // error statistic
     console.log('\r\nErrors: ' + (errors.length).toString()[(errors.length ? 'red' : 'debug')]);

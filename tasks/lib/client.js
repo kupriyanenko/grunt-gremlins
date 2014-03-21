@@ -22,10 +22,10 @@ var customLogger = {
 };
 
 // test runner
-window.phantomHorde = function(horde) {
+window.phantomHorde = function(horde, options) {
     horde.logger(customLogger);
 
-    horde.unleash({ nb: 20 });
+    horde.unleash(options);
 
     horde.after(function() {
         window.callPhantom({ end: true });
