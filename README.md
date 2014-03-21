@@ -32,7 +32,7 @@ Inside your `Gruntfile.js` file add a section named `gremlins`.
 
 #### Config Example
 
-Example requirejs jsttojs config:
+Example gremlins config:
 
 ```javascript
   gremlins: {
