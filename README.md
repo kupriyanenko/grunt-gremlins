@@ -37,7 +37,9 @@ grunt.initConfig({
             // Task-specific options go here.
         },
         your_target: {
-            // Target-specific options go here.
+            options: {
+                // Target-specific options go here.
+            }
         },
     }
 });
@@ -59,11 +61,6 @@ Type: `String`
 
 Path to js file with gremlins test
 
-#### timeout
-Type: `Number`
-
-Needed only if `test` defined. Timeout for test injecting.
-
 ### Usage Examples
 
 There are three formats you can use to run this task.
@@ -73,8 +70,10 @@ There are three formats you can use to run this task.
 _Grunt task_:
 ```js
 gremlins: {
-  options: {
-    path: './examples/basic.html'
+  tests: {
+    options: {
+      path: './examples/basic.html'
+    }
   }
 }
 ```
@@ -105,9 +104,11 @@ _./examples/basic.html_:
 _Grunt task_:
 ```js
 gremlins: {
-  options: {
-    path: './examples/basic.html',
-    test: __dirname + '/examples/test.gremlins.js'
+  local: {
+    options: {
+      path: './examples/basic.html',
+      test: __dirname + '/examples/test.gremlins.js'
+    }
   }
 }
 ```
@@ -129,13 +130,14 @@ _Grunt task_:
 ```js
 gremlins: {
   local: {
-    path: './examples/basic.html'
+    options: {
+      path: './examples/basic.html'
+    }
   },
   external: {
     options: {
       path: 'https://google.com',
-      test: __dirname + '/examples/test.gremlins.js',
-      timeout: 1000
+      test: __dirname + '/examples/test.gremlins.js'
     }
   }
 }
